@@ -1,14 +1,16 @@
 import logo from "./logo.svg";
 import "./App.css";
 import FormLogin from "./components/FormLogin";
+import FormRegister from "./components/FormRegister";
+import GlobalStyle from "./styles/global";
+import Routes from "./routes";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <FormLogin />
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <Routes />
+    </>
   );
 }
 

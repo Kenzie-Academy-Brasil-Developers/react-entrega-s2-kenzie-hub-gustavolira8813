@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useHistory } from "react-router";
 import axios from "axios";
 
 function FormLogin() {
@@ -9,6 +10,7 @@ function FormLogin() {
     password: yup.string().min(6).required(),
   });
 
+  let history = useHistory("");
   const {
     register,
     handleSubmit,
@@ -23,6 +25,7 @@ function FormLogin() {
         console.log(res);
         window.localStorage.clear();
         window.localStorage.setItem("authToken", res.data.token);
+        // history.push('/welcome')
       })
       .catch((err) => console.log(err));
   }
