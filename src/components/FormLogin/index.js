@@ -3,6 +3,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useHistory } from "react-router";
 import axios from "axios";
+import { Button, TextField } from "@material-ui/core";
 
 function FormLogin() {
   const schema = yup.object().shape({
@@ -32,9 +33,33 @@ function FormLogin() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input placeholder="Email" {...register("email")} />
-      <input placeholder="Password" {...register("password")} />
-      <button type="submit">Sign In</button>
+      <div>
+        <TextField
+          label="email"
+          variant="outlined"
+          color="primary"
+          margin="normal"
+          size="small"
+          {...register("email")}
+          error={!!errors.email}
+          helperText={errors.email?.message}
+        />
+      </div>
+      <div>
+        <TextField
+          label="password"
+          variant="outlined"
+          color="primary"
+          margin="normal"
+          size="small"
+          {...register("password")}
+          error={!!errors.password}
+          helperText={errors.password?.message}
+        />
+      </div>
+      <Button type="submit" variant="contained" color="primary">
+        Sign In
+      </Button>
     </form>
   );
 }

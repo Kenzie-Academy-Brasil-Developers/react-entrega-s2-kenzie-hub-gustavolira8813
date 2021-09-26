@@ -1,14 +1,13 @@
-import logo from "./logo.svg";
 import "./App.css";
-import FormLogin from "./components/FormLogin";
-import FormRegister from "./components/FormRegister";
+
 import GlobalStyle from "./styles/global";
 import Routes from "./routes";
-
+import Menu from "./components/Menu";
 function App() {
   return (
     <>
       <GlobalStyle />
+      <Menu />
       <Routes />
     </>
   );

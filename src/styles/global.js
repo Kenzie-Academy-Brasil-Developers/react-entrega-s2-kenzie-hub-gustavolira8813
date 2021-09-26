@@ -15,6 +15,7 @@ export default createGlobalStyle`
 body{
     background: var(---white);
     color: var(---black);
+    margin-top: 100px;
 }
 button {
     cursor: pointer;
