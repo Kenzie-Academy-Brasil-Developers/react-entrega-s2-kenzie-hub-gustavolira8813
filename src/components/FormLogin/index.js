@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useHistory } from "react-router";
 import axios from "axios";
+import { Redirect, useHistory } from "react-router";
 import { Button, TextField } from "@material-ui/core";
+import { toast } from "react-toastify";
 
-function FormLogin() {
+function FormLogin({ authenticated, setAuthenticated, setUser, setToken }) {
   const schema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().min(6).required(),
@@ -18,17 +19,22 @@ function FormLogin() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  function onSubmit(user) {
-    console.log({ ...user });
+  function onSubmit(data) {
+    console.log(data);
     axios
-      .post("https://kenziehub.herokuapp.com/sessions", { ...user })
+      .post("https://kenziehub.herokuapp.com/sessions", data)
       .then((res) => {
         console.log(res);
-        window.localStorage.clear();
-        window.localStorage.setItem("authToken", res.data.token);
-        // history.push('/welcome')
+        toast.success("Logado com Sucesso");
+        localStorage.clear();
+        localStorage.setItem("token", JSON.stringify(res.data.token));
+        setUser(res.data.user);
+        setToken(res.data.token);
+        history.push("/");
+        //essa função faz com que retorne os 2 valores(sucesso e error)
+        setAuthenticated(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => toast.error("usuário ou senha incorretos"));
   }
 
   return (
@@ -57,9 +63,11 @@ function FormLogin() {
           helperText={errors.password?.message}
         />
       </div>
-      <Button type="submit" variant="contained" color="primary">
-        Sign In
-      </Button>
+      <div>
+        <Button type="submit" variant="contained" color="primary">
+          Sign In
+        </Button>
+      </div>
     </form>
   );
 }

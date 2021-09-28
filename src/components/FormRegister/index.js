@@ -3,7 +3,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import axios from "axios";
 import { Button, TextField } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 function FormRegister() {
+  const history = useHistory();
+
   const schema = yup.object().shape({
     email: yup.string().email().required(),
     password: yup.string().min(6, "minimo 6").required(),
@@ -22,8 +26,15 @@ function FormRegister() {
     console.log(data);
     axios
       .post("https://kenziehub.herokuapp.com/users", data)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        toast.success("Cadastrado com sucesso");
+        console.log(res);
+        history.push("/login");
+      })
+      .catch((err) => {
+        toast.error("Email já cadastrado");
+        console.log(err);
+      });
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -105,9 +116,11 @@ function FormRegister() {
       <input placeholder="Bio" {...register("bio")} />
       <input placeholder="Contact" {...register("contact")} />
       <input placeholder="Course Module" {...register("course_module")} /> */}
-      <Button type="submit" variant="contained" color="primary">
-        Cadastrar
-      </Button>
+      <div>
+        <Button type="submit" variant="contained" color="primary">
+          Cadastrar
+        </Button>
+      </div>
     </form>
   );
 }

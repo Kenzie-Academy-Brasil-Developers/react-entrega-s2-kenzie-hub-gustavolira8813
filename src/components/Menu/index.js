@@ -12,6 +12,7 @@ function Menu() {
         <MenuItem onClick={() => sendTo("/")}>Home</MenuItem>
         <MenuItem onClick={() => sendTo("/login")}>Login</MenuItem>
         <MenuItem onClick={() => sendTo("/register")}>Register</MenuItem>
+        <MenuItem onClick={() => sendTo("/profile")}>Profile</MenuItem>
       </Toolbar>
     </AppBar>
   );

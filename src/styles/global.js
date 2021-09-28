@@ -16,6 +16,7 @@ body{
     background: var(---white);
     color: var(---black);
     margin-top: 100px;
+    text-align:center;
 }
 button {
     cursor: pointer;

@@ -1,0 +1,11 @@
+.userList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.userList_item {
+  width: 160px;
+  height: 100px;
+  margin: 5px;
+}
